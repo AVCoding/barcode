@@ -22,7 +22,7 @@
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         this.stream = stream;
 
-        let track = stream.getVideoTracks()[0];
+        let track = stream.getVideoTracks();
 
         constraints = track.getConstraints();
         constraints.height = 1080;
