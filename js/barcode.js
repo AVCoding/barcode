@@ -26,7 +26,7 @@
 //         }
 
         //stream = await navigator.mediaDevices.getUserMedia(constraints);
-        stream = await navigator.mediaDevices.getUserMedia( {video: true}, constraints);
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
 
         
         this.stream = stream;
