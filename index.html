@@ -357,6 +357,27 @@
       
     }
 
+    async function enumDevices() {
+      let result = [];
+      const devices = await navigator.mediaDevices.enumerateDevices();
+      for (let i in devices) {
+        let device = devices[i];
+        if (device.kind === "videoinput") {
+          try {
+            const stream = await navigator.mediaDevices.getUserMedia({ video: { groupId: device.groupId } });
+            const track = await stream.getTracks()[0];
+            const caps = await track.getCapabilities();
+            if (caps.facingMode.indexOf("user") === -1) {
+              let label = device.label != "" ? device.label : "Camera " + i;
+              result.push({ label: label, deviceId: caps.deviceId });
+            }
+            stream.getTracks().forEach(track => track.stop());
+          } catch (e) {}
+        }
+      }
+      return result;
+    }
+
    
 
     $(".dropdown-item.mode").click(function (event) {
