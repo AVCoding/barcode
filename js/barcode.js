@@ -19,7 +19,7 @@
       try {
 
         let constraints = { video: { facingMode: "environment" } };
-        if (this.cameraId) constraints = { video: true, { deviceId: { exact: this.cameraId } } };
+        if (this.cameraId) constraints = { video: true, deviceId: { exact: this.cameraId } };
         stream = await navigator.mediaDevices.getUserMedia(constraints);
         this.stream = stream;
 
