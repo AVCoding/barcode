@@ -17,9 +17,14 @@
       window.dispatcher.Status();
 
       try {
+           let constraints = { video: { facingMode: { exact: "environment" } } };
+        
+//         let constraints = { video: { facingMode: "environment" } };
+//         if (this.cameraId)          
+//         {
+//           constraints = { video: true,   deviceId: { exact: this.cameraId }  };
+//         }
 
-        let constraints = { video: { facingMode: "environment" } };
-        if (this.cameraId) constraints = { video: { deviceId: { exact: this.cameraId } } };
         //stream = await navigator.mediaDevices.getUserMedia(constraints);
         stream = await navigator.mediaDevices.getUserMedia( {video: true}, constraints);
 
