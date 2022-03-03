@@ -1,4 +1,27 @@
-﻿class Streamer {
+
+async function enumDevices() {
+  let result = [];
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  for (let i in devices) {
+    let device = devices[i];
+    if (device.kind === "videoinput") {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { groupId: device.groupId } });
+        const track = await stream.getTracks()[0];
+        const caps = await track.getCapabilities();
+        if (caps.facingMode.indexOf("user") === -1) {
+          let label = device.label != "" ? device.label : "Camera " + i;
+          result.push({ label: label, deviceId: caps.deviceId });
+        }
+        stream.getTracks().forEach(track => track.stop());
+      } catch (e) {}
+    }
+  }
+  return result;
+}
+
+
+class Streamer {
 
   cameraId;
   capturer;
@@ -9,6 +32,7 @@
     this.Run();
   }
 
+
   async Run() {
     while (true) {
       let videoRatio = 1;
@@ -17,18 +41,18 @@
       window.dispatcher.Status();
 
       try {
-           let constraints = { video: { facingMode: { exact: "environment" } } };
-        
-//         let constraints = { video: { facingMode: "environment" } };
-//         if (this.cameraId)          
-//         {
-//           constraints = { video: true,   deviceId: { exact: this.cameraId }  };
-//         }
+        // navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.msGetUserMedia;
 
-        //stream = await navigator.mediaDevices.getUserMedia(constraints);
+        // let constraints = { video: { facingMode: { exact: "environment" } } };
+        // if (this.cameraId) 
+        // {
+        //   constraints = { video: { deviceId: { exact: this.cameraId } } };
+        // }
+          
+        let constraints = { video: { facingMode: "environment" } };
+        if (this.cameraId) constraints = { video: { deviceId: { exact: this.cameraId } } };
+
         stream = await navigator.mediaDevices.getUserMedia(constraints);
-
-        
         this.stream = stream;
 
         let track = stream.getVideoTracks()[0];
