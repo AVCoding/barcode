@@ -131,7 +131,9 @@ class Capturer {
     let iteration = 0;
     const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
-    const context = canvas.getContext("2d");
+    //const context = canvas.getContext("2d");
+    const context = canvas.getContext("2d").filter = 'grayscale(0)';
+
     const renderer = new ImageCapture(video.srcObject.getVideoTracks()[0]);
     let frameRect = {};
 
