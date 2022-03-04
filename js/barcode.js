@@ -218,12 +218,8 @@ class Capturer {
         const bCanvas = document.createElement("canvas");
         bCanvas.width = bitmap.width * (frameRect.right - frameRect.left);
         bCanvas.height = bitmap.height * (frameRect.bottom - frameRect.top);
-        
-        var bcGreyScale = bCanvas.getContext("2d").filter = 'saturate(0)';
-        bcGreyScale.drawImage(bitmap, bitmap.width * frameRect.left, bitmap.height * frameRect.top, bitmap.width * (frameRect.right - frameRect.left), bitmap.height * (frameRect.bottom - frameRect.top), 0, 0, bCanvas.width, bCanvas.height);
 
-        
-        //bCanvas.getContext("2d").drawImage(bitmap, bitmap.width * frameRect.left, bitmap.height * frameRect.top, bitmap.width * (frameRect.right - frameRect.left), bitmap.height * (frameRect.bottom - frameRect.top), 0, 0, bCanvas.width, bCanvas.height);
+        bCanvas.getContext("2d").drawImage(bitmap, bitmap.width * frameRect.left, bitmap.height * frameRect.top, bitmap.width * (frameRect.right - frameRect.left), bitmap.height * (frameRect.bottom - frameRect.top), 0, 0, bCanvas.width, bCanvas.height);
 
         let barcode = await decode(bCanvas); //bitmap
 
