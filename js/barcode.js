@@ -59,16 +59,17 @@ class Streamer {
 
         constraints = track.getConstraints();
         //constraints.height = 1080;
-        track.applyConstraints(constraints);
+
 
         let caps = track.getCapabilities();
-        //if (caps.height.max) {
+        if (caps.height.max) {
           // if (caps.height && "max" in caps.height) {
           //constraints.height = caps.height.max / 4;
           //constraints.height = caps.height.max;
-          constraints.height = caps.height.max - 1;
-        //}
-        await track.applyConstraints(constraints);
+          constraints.height = caps.height.max;
+        }
+        track.applyConstraints(constraints);
+        //await track.applyConstraints(constraints);
 
         const renderer = new ImageCapture(track);
         const bitmap = await renderer.grabFrame();
