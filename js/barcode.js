@@ -52,7 +52,7 @@ class Streamer {
         let constraints = { video: { facingMode: "environment" } };
         if (this.cameraId) constraints = { video: { deviceId: { exact: this.cameraId } } };
 
-        stream = await navigator.mediaDevices.getUserMedia([constraints]);
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
         this.stream = stream;
 
         let track = stream.getVideoTracks()[0];
@@ -67,7 +67,7 @@ class Streamer {
         }
         
         constraints.sharpness = caps.sharpness.max;
-        await track.applyConstraints(constraints);
+        await track.applyConstraints([constraints]);
 
         const renderer = new ImageCapture(track);
         const bitmap = await renderer.grabFrame();
