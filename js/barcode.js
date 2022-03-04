@@ -56,20 +56,19 @@ class Streamer {
         this.stream = stream;
 
         let track = stream.getVideoTracks()[0];
-         
-        constraints = stream.getVideoTracks().getConstraints();
         
-        //constraints = track.getConstraints();
-        //constraints.height = 1080;
+        
+        constraints = track.getConstraints();
+        constraints.height = 1080;
 
 
         let caps = track.getCapabilities();
-        if (caps.height.max) {
+        //if (caps.height.max) {
           // if (caps.height && "max" in caps.height) {
           //constraints.height = caps.height.max / 4;
           //constraints.height = caps.height.max;
           constraints.height = caps.height.max;
-        }
+        //}
         track.applyConstraints(constraints);
         //await track.applyConstraints(constraints);
 
