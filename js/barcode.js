@@ -52,7 +52,7 @@ class Streamer {
         let constraints = { video: { facingMode: "environment" } };
         if (this.cameraId) constraints = { video: { deviceId: { exact: this.cameraId } } };
 
-        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        stream = await navigator.mediaDevices.getUserMedia([constraints]);
         this.stream = stream;
 
         let track = stream.getVideoTracks()[0];
