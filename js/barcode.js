@@ -60,6 +60,7 @@ class Streamer {
         constraints = track.getConstraints();
         //constraints.height = 1080;
 
+        
         let caps = track.getCapabilities();
         if (caps.height && "max" in caps.height) {
           //constraints.height = caps.height.max / 4;
@@ -69,6 +70,10 @@ class Streamer {
         await track.applyConstraints([constraints]);
 
         const renderer = new ImageCapture(track);
+        
+        // - ***** -//
+        let cameraSettings = renderer.getCapabilities();
+        
         const bitmap = await renderer.grabFrame();
         videoRatio = bitmap.width / bitmap.height;
         bitmap.close();
