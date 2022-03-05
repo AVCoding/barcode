@@ -60,7 +60,7 @@ class Streamer {
         constraints = track.getConstraints();
         //constraints.height = 1080;
 
-        constraints.frameRate = 5;
+        constraints.frameRate = caps.frameRate.max;
         
         
         let caps = track.getCapabilities();
