@@ -72,7 +72,7 @@ class Streamer {
         const renderer = new ImageCapture(track);
         
         // - ***** -//
-        let cameraSettings = renderer.getPhotoSettings(ev);
+        let cameraSettings = renderer.getPhotoSettings();
         
         const bitmap = await renderer.grabFrame();
         videoRatio = bitmap.width / bitmap.height;
