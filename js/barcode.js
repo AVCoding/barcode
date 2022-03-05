@@ -65,7 +65,7 @@ class Streamer {
         
         let caps = track.getCapabilities();
 
-        constraints.exposureMode = caps.exposureMode.continuous;
+        constraints.exposureMode = caps.exposureMode["continuous"];
         constraints.exposureTime = caps.exposureTime.max;
         
         if (caps.height && "max" in caps.height) {
